@@ -150,24 +150,24 @@ runs:
         flavor: |
           latest=false
 
-    # - name: Login to GitHub Container Registry
-    #   uses: docker/login-action@v3
-    #   with:
-    #     registry: ghcr.io
-    #     username: ${{ github.repository_owner }}
-    #     password: ${{ github.token }}
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ github.token }}
 
-    # - name: Build and Push to GitHub Container Registry
-    #   uses: docker/bake-action@v5
-    #   with:
-    #     push: true
-    #     files: |
-    #       docker/docker-bake-cuda.hcl
-    #       ${{ steps.meta-universe-common-devel-cuda.outputs.bake-file }}
-    #       ${{ steps.meta-universe-sensing-perception-devel-cuda.outputs.bake-file }}
-    #       ${{ steps.meta-universe-sensing-perception-cuda.outputs.bake-file }}
-    #       ${{ steps.meta-universe-devel-cuda.outputs.bake-file }}
-    #       ${{ steps.meta-universe-cuda.outputs.bake-file }}
-    #     provenance: false
-    #     set: |
-    #       ${{ inputs.build-args }}
+    - name: Build and Push to GitHub Container Registry
+      uses: docker/bake-action@v5
+      with:
+        push: false
+        files: |
+          docker/docker-bake-cuda.hcl
+          ${{ steps.meta-universe-common-devel-cuda.outputs.bake-file }}
+          ${{ steps.meta-universe-sensing-perception-devel-cuda.outputs.bake-file }}
+          ${{ steps.meta-universe-sensing-perception-cuda.outputs.bake-file }}
+          ${{ steps.meta-universe-devel-cuda.outputs.bake-file }}
+          ${{ steps.meta-universe-cuda.outputs.bake-file }}
+        provenance: false
+        set: |
+          ${{ inputs.build-args }}
